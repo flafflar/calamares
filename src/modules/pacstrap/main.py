@@ -9,4 +9,4 @@ def run():
 
     root_mount_point = libcalamares.globalstorage.value("rootMountPoint")
 
-    subprocess.run(['sudo' 'pacstrap', root_mount_point, 'base', 'linux'])
+    subprocess.run(['sudo', 'pacstrap', root_mount_point, 'base', 'linux'])
