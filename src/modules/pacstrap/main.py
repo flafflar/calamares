@@ -8,10 +8,17 @@ installed_packages = 0
 
 def output_handler(line):
     global total_packages, downloaded_packages, installed_packages
+
     if line.startswith('Packages ('):
         total_packages = int(re.findall('\((\d+)\)', line)[0])
-    if 'downloading' in line and total_packages != -1:
+
+    # Catch percentages in the output
+    percentages = re.findall('\d+%', line)
+    if len(percentages) > 0 and total_packages != -1:
+        downloaded_packages = int(downloaded_packages) + float(percentages[0][:-1]) / 100.0
+    elif 'downloading' in line and total_packages != -1:
         downloaded_packages += 1
+
     if 'installing' in line and total_packages != -1:
         installed_packages += 1
 
