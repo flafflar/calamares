@@ -25,6 +25,9 @@ def run():
 
     root_mount_point = libcalamares.globalstorage.value("rootMountPoint")
 
+    if root_mount_point == None or root_mount_point == "":
+        return "Error", "Root not mounted"
+
     packages = libcalamares.job.configuration.get("packages")
     libcalamares.utils.debug('Packages to install: ' + ','.join(packages))
 
