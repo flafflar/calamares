@@ -32,6 +32,6 @@ def run():
     libcalamares.utils.debug('Packages to install: ' + ','.join(packages))
 
     try:
-        libcalamares.utils.host_env_process_output(['pacstrap', root_mount_point] + packages, output_handler)
+        libcalamares.utils.host_env_process_output(['stdbuf', '-oL', 'pacstrap', root_mount_point] + packages, output_handler)
     except:
         pass
