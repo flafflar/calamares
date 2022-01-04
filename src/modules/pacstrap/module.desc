@@ -5,3 +5,4 @@ type:       "job"
 name:       "pacstrap"
 interface:  "python"
 script:     "main.py"
+weight:     12
