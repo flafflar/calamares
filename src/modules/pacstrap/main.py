@@ -25,7 +25,11 @@ def run():
 
     root_mount_point = libcalamares.globalstorage.value("rootMountPoint")
 
+    packages = libcalamares.job.configuration.get("packages")
+
+    print(packages)
+
     try:
-        libcalamares.utils.host_env_process_output(['pacstrap', root_mount_point, 'base', 'linux'], output_handler)
+        libcalamares.utils.host_env_process_output(['pacstrap', root_mount_point] + packages, output_handler)
     except:
         pass
