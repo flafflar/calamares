@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import libcalamares
+import subprocess
 import re
 
 total_packages = -1
@@ -40,5 +41,5 @@ def run():
 
     try:
         libcalamares.utils.host_env_process_output(['stdbuf', '-oL', 'pacstrap', root_mount_point] + packages, output_handler)
-    except:
-        pass
+    except subprocess.CalledProcessError:
+        raise
