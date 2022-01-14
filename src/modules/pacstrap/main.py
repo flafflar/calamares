@@ -10,6 +10,8 @@ installed_packages = 0
 def output_handler(line):
     global total_packages, downloaded_packages, installed_packages
 
+    libcalamares.utils.debug(line)
+
     if line.startswith('Packages ('):
         total_packages = int(re.findall('\((\d+)\)', line)[0])
 
