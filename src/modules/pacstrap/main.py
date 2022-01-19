@@ -48,4 +48,9 @@ def run():
     try:
         libcalamares.utils.host_env_process_output(['stdbuf', '-oL', 'pacstrap', root_mount_point] + packages, output_handler)
     except subprocess.CalledProcessError as e:
-        return f"Error: pacstrap exited with exit code {e.returncode}", f"Command output:\n{output}"
+        # Output all the pacstrap output in the calamares logs
+        libcalamares.utils.error(output)
+
+        # Display only errors to the user
+        error_lines = '\n'.join(re.findall('.*error.*', output, re.IGNORECASE))
+        return f"Error: pacstrap exited with exit code {e.returncode}", error_lines
