@@ -7,9 +7,13 @@ total_packages = -1
 downloaded_packages = 0
 installed_packages = 0
 
+output = ""
+
 def output_handler(line):
     global total_packages, downloaded_packages, installed_packages
+    global output
 
+    output += line + '\n'
     libcalamares.utils.debug(line)
 
     if line.startswith('Packages ('):
@@ -43,5 +47,5 @@ def run():
 
     try:
         libcalamares.utils.host_env_process_output(['stdbuf', '-oL', 'pacstrap', root_mount_point] + packages, output_handler)
-    except subprocess.CalledProcessError:
-        raise
+    except subprocess.CalledProcessError as e:
+        return f"Error: pacstrap exited with exit code {e.returncode}", f"Command output:\n{output}"
