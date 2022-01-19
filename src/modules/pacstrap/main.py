@@ -13,7 +13,7 @@ def output_handler(line):
     global total_packages, downloaded_packages, installed_packages
     global output
 
-    output += line + '\n'
+    output += line
     libcalamares.utils.debug(line)
 
     if line.startswith('Packages ('):
